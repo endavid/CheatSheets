@@ -6,8 +6,8 @@ Blender
 
 ### Camera controls ###
 On the numeric keypad
-* <kbd>1<kbd>: Align camera to Y axis
-* <kbd>Shift</kbd>+<kbd>1<kbd>: Align camera to Z axis
+* <kbd>1</kbd>: Align camera to Y axis
+* <kbd>Shift</kbd>+<kbd>1</kbd>: Align camera to Z axis
 * <kbd>5</kbd>: Switch Perspective/Ortho
 
 ### Create parent object group ###
