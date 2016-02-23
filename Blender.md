@@ -18,7 +18,7 @@ On the numeric keypad
 
 ### Measuring distances ###
 * Select **Grease Pencil** from the left tab
-* Select **Ruler/Protactor* 
+* Select **Ruler/Protactor** 
 * <kbd>Ctrl</kbd>-drag to draw a line in your object. It should snap to the surface.
 * <kbd>Esc</kbd> to stop measuring things and remove all the annotations.
 * Ref. http://blender.stackexchange.com/a/19773/2373
