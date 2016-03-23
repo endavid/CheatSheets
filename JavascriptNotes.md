@@ -26,7 +26,7 @@ Functions that take functions as arguments or that return functions.
     }
     var avg = average(1, 2, 9);
 
-### 21. Use apply to Call functions with with different number of arguments ###
+### 21. Use apply to Call functions with different number of arguments ###
 
     average.apply(null, [1, 2, 9]);
 
@@ -44,3 +44,8 @@ Functions that take functions as arguments or that return functions.
       self.name = name;
       self.pwd = pwd;
     }
+
+### 34. Store methods on prototypes
+
+Storing methods on a prototype makes them available to all instances without requiring multiple copies of the functions that implement them or extra properties on each instance object.
+Modern JS engines heavily optimize prototype lookups. So instance methods may not be faster, and they use more memory than prototype methods.
