@@ -3,6 +3,7 @@ Blender
 
 ### Main keyboard shortcuts ###
 * <kbd>Tab</kbd>: Switch between Object mode and Edit mode
+* <kbd>Space</kbd>: Quick search commands
 
 ### Camera controls ###
 On the numeric keypad
@@ -16,9 +17,13 @@ On the numeric keypad
 * <kbd>Shift</kbd> select the Empty object if it's not.
 * <kbd>Ctrl</kbd>+<kbd>P</kbd> → Set Parent To Object
 
+### Edit Mode: Selection ###
+* <kbd>Alt</kbd>+ Mouse right click: select a vertex loop.
+* **Loop Cut and Slide**: create a new vertex loop.
+
 ### Measuring distances ###
 * Select **Grease Pencil** from the left tab
-* Select **Ruler/Protactor** 
+* Select **Ruler/Protactor**
 * <kbd>Ctrl</kbd>-drag to draw a line in your object. It should snap to the surface.
 * <kbd>Esc</kbd> to stop measuring things and remove all the annotations.
 * Ref. http://blender.stackexchange.com/a/19773/2373
