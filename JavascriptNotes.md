@@ -97,3 +97,27 @@ These behave the same,
 But it's not consistent with the behaviour if you pass a number,
     [17]
     new Array(17); // creates an empty array of length 17
+
+### 55. Accept Options objects for keyword arguments
+
+Self-documenting API.
+Note to self: like Objective-C named parameters
+
+    var alert = new Alert({x: 100, y: 50, color: "white"})
+    function Alert(opts) {
+      opts = opts || {};
+      this.x = opts.x || 0;
+      this.y = opts.y || 0;
+      this.color = opts.color || "gray";
+    }
+
+You can use the "extend" function to make life easier,
+
+    function Alert(opts) {
+      opts = extend({
+        x: 0,
+        y: 0,
+        color: "gray"
+      }, opts);
+      extend(this, opts);
+    }
