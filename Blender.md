@@ -10,6 +10,7 @@ On the numeric keypad
 * <kbd>1</kbd>: Align camera to Y axis
 * <kbd>Shift</kbd>+<kbd>1</kbd>: Align camera to Z axis
 * <kbd>5</kbd>: Switch Perspective/Ortho
+* <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Q</kbd>: Toggle quad view
 
 ### Create parent object group ###
 * <kbd>Shift</kbd>+<kbd>A</kbd> Add Empty Axis

@@ -1,6 +1,9 @@
 Effective Javascript
 ====================
 
+Language
+---------
+
 ### 1. Write your files so that they behave the same in either mode ###
 
     (function() {
@@ -98,7 +101,11 @@ But it's not consistent with the behaviour if you pass a number,
     [17]
     new Array(17); // creates an empty array of length 17
 
-### 55. Accept Options objects for keyword arguments
+
+API design
+-----------
+
+### 55. Accept Options objects for keyword arguments ###
 
 Self-documenting API.
 Note to self: like Objective-C named parameters
@@ -120,4 +127,103 @@ You can use the "extend" function to make life easier,
         color: "gray"
       }, opts);
       extend(this, opts);
+    }
+
+### 56. Avoid unnecessary state ###
+
+While state is sometimes essential, stateless APIs tend to be easier to learn and use, more self-documenting, and less error-prone.
+
+### 57. Use structural typing for flexible interfaces ###
+
+Structural typing = duck typing
+
+
+### 60. Support method chaining ###
+
+Known as the *fluent style* for stateful APIs.
+
+jQuery example
+
+    $("#bla")
+    .html("Something")
+    .removeClass("info")
+    .addClass("error")
+
+Note to self: return \*this in C++ setters.
+
+Concurrency
+-----------
+
+### 61. Don't block the event queue on I/O ###
+
+Use async functions.
+
+Workers, from the Worker API, are executed in a completely isolated state, with no access to the global scope or web page contents of the application's main thread, so they cannnot interfere with the execution of code running in from the main event queue. Synchronous functions in a worker are less problematic.
+
+### 64. Use recursion for asynchronous loops ###
+
+    function getOneAsync(objs, onsuccess, onfailure) {
+      var n = objs,length;
+      function tryNext(i) {
+        if (i >= n) {
+          onfailure("all failed");
+          return;
+        }
+        doAsync(obj[i], onsuccess, function() {
+          tryNext(i+1);
+        });
+      }
+      tryNext(0);
+    }
+
+Notice that we won't get a stack overflow, because async APIs return immediately --before their callbacks are invoked.
+
+### 65. Don't block the event queue on computation ###
+
+*(a) Use Workers*
+
+    var ai = new Worker("ai.js");
+
+    // send messages to the Worker
+    ai.postMessage(JSON.stringify({
+      userMove: userMove
+    }));
+
+    // register event handler
+    ai.onmessage = function(event) {
+      executeMove(JSON.parse(event.data).computerMove);
+    };
+
+    // ai.js Worker code
+    self.onmessage = function(event) {
+      var userMove = JSON.parse(event.data).userMove;
+      var computerMove = computeNextMove(userMove);
+      var message = JSON.stringify({
+        computerMove: computerMove
+      });
+      self.postMessage(message);
+    }
+
+*(b) Break up algorithm into multiple steps*
+
+Convert a loop into an asycn recursive loop (64)
+
+    Member.prototype.inNetwork = function(other, callback) {
+      var visited = {};
+      var worklist = [this];
+      function next() {
+        if (worklist.length === 0) {
+          callback(false);
+          return;
+        }
+        var member = worklist.pop();
+        // ...
+        if (member === other) { // found?
+          callback(true);
+          return;
+        }
+        // ...
+        setTimeout(next, 0); // schedule the next iteration
+      }
+      setTimeout(next, 0); // schedule the first iteration
     }
