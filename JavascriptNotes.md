@@ -227,3 +227,61 @@ Convert a loop into an asycn recursive loop (64)
       }
       setTimeout(next, 0); // schedule the first iteration
     }
+
+### 67. Never call async callbacks synchronously ###
+
+Even if the data is immediately available!
+Bad example,
+
+    function downloadCachingAsync(url, onsuccess, onerror) {
+      if (cache.has(url)) {
+        onsuccess(cache.get(url)); // sync is bad here!
+        return;
+      }
+      return downloadAsync(url, function(file) {
+        cache.set(url, file);
+        onsuccess(file);
+      }, onerror);
+    }
+
+The async function was expected to run in a separate turn, not in the turn of the event loop that initiated the download! Also, async loops as recursive functions are expected to have an empty call stack, but with the sync call that's no longer the case. Can lead to stack overflows or mishandled exceptions.
+
+Fix:
+
+    function downloadCachingAsync(url, onsuccess, onerror) {
+      if (cache.has(url)) {
+        var cached = cache.get(url);
+        setTimeout(onsuccess.bind(null, cached), 0);
+        return;
+      }
+      return downloadAsync(url, function(file) {
+        cache.set(url, file);
+        onsuccess(file);
+      }, onerror);
+    }
+
+
+### 68. Use promises for cleaner async logic ###
+
+Promises = deferreds or futures
+The advantage is composability.
+
+    downloadAsync("txt", function(file) {
+      console.log("file: "+file);
+    })
+    // becomes:
+    var p = downloadP("txt"); // promise object
+    p.then(function(file) {
+      console.log("file: "+file);
+    })
+    // compose
+    var fileP = downloadP("txt"); // promise object
+    var lengthP = fileP.then(function(file) {
+      return file.length;
+    });
+    lengthP.then(function(length) {
+      console.log("length: "+length);
+    });
+
+when: function to join Promises
+select/choose: pick up the promise that comes first
