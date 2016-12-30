@@ -258,22 +258,23 @@ In Clojure,
 
 You can give names to inner arguments in the variadic list,
 
+```clojure
     (defn f
       [[a b & others]]
       (println (str "sum of first two: " (+ a b)))
       (println (str "sum of the rest: " (apply + others)))
     )
     (f [1, 2, 4, 9])
-    sum of first two: 3
-    sum of the rest: 13
-    nil
+    ;; sum of first two: 3
+    ;; sum of the rest: 13
+    ;; nil
 
     (defn birthday
       [{day :day month :month}]
       (str day "/" month)
     )
     (birthday {:year 1978 :month 11 :day 14})
-    "14/11"
+    ;; "14/11"
 
     (defn birthday
       [{:keys [day month] :as date}]
@@ -281,12 +282,13 @@ You can give names to inner arguments in the variadic list,
       (str day "/" month)
     )
     (birthday {:year 1978 :month 11 :day 14})
-    {:year 1978, :month 11, :day 14}
-    "14/11"
-
+    ;; {:year 1978, :month 11, :day 14}
+    ;; "14/11"
+```
 
 In Swift, you don't need "destructuring" because all the parameters are named. You can have "others" as variadic,
 
+```swift
     func f(_ a :Int,_ b: Int, _ others: Int...) {
         print("sum of first two \(a+b)")
         var sum = 0
@@ -296,11 +298,12 @@ In Swift, you don't need "destructuring" because all the parameters are named. Y
         print("sum of others \(sum)")
     }
     f(1,2)
-    sum of first two 3
-    sum of others 0
+    // sum of first two 3
+    // sum of others 0
     f(1,2,4,9)
-    sum of first two 3
-    sum of others 13
+    // sum of first two 3
+    // sum of others 13
+```
 
 ### Anonymous functions ###
 
@@ -379,7 +382,7 @@ Creating a project
 ===================
 * http://www.braveclojure.com/getting-started/
 
-
+```bash
     lein new app clojure-test
     cd clojure-test
     # to run
@@ -388,7 +391,7 @@ Creating a project
     lein uberjar
     # to run the distributable
     java -jar target/uberjar/clojure-test-0.1.0-SNAPSHOT-standalone.jar
-
+```
 
 From the tutorial,
 _and gloat to your colleagues who are still using last decade’s languages_
