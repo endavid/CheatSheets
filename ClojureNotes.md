@@ -13,6 +13,11 @@ Then try,
 
 * Start tutorial: http://www.braveclojure.com/do-things/
 
+Cheatsheet
+===========
+http://clojure.org/api/cheatsheet
+
+
 Language basics
 ================
 With comparisons to other languages.
@@ -169,8 +174,12 @@ Can either take a function as an argument or return a function.
 
 I really don't like this... Because the order now changes...
 
-    (map inc (conj [0 2 4] 6)) => (1 3 5 7)
-    (conj (map inc [0 2 4]) 7) => (7 1 3 5)
+    (map inc (conj [0 2 4] 6))   => (1 3 5 7)
+    (conj (map inc [0 2 4]) 7)   => (7 1 3 5)
+
+But there's mapv,
+
+    (conj (mapv inc [0 2 4]) 7)  => [1 3 5 7]
 
 ### Special forms ###
 
@@ -319,6 +328,72 @@ E.g.
       #(* % mult-by))
     (def mult4 (mult-maker 4))
     (map mult4 [1 4 3])        => (4 16 12)
+
+
+Scope
+-----
+"let" introduces a new scope
+
+    (def x 0)
+    (let [x 1] x)
+    ; => 1
+
+Loops
+-----
+
+### loop ###
+Using recursion,
+
+    (loop [iteration 0]
+      (println (str "Iteration " iteration))
+      (if (> iteration 3)
+        (println "Goodbye!")
+        (recur (inc iteration))))
+    ; => Iteration 0
+    ; => Iteration 1
+    ; => Iteration 2
+    ; => Iteration 3
+    ; => Iteration 4
+    ; => Goodbye!
+    nil
+
+### reduce ###
+Process each element in a sequence and build a result,
+
+    (reduce + [1 2 3 4])
+    (reduce + 1 [2 3 4])
+
+are equivalent to
+
+    (+ (+ (+ 1 2) 3) 4)
+
+
+Regular expressions
+--------------------
+
+    #"regular-expression"
+
+
+
+Creating a project
+===================
+* http://www.braveclojure.com/getting-started/
+
+    lein new app clojure-test
+    cd clojure-test
+    # to run
+    lein run
+    # to create a distributable
+    lein uberjar
+    # to run the distributable
+    java -jar target/uberjar/clojure-test-0.1.0-SNAPSHOT-standalone.jar
+
+
+From the tutorial,
+_and gloat to your colleagues who are still using last decade’s languages_
+
+Fine, but in the 2nd chapter is telling you to install Emacs... An editor from 1976...
+
 
 Debugging
 =========
