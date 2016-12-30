@@ -379,6 +379,7 @@ Creating a project
 ===================
 * http://www.braveclojure.com/getting-started/
 
+
     lein new app clojure-test
     cd clojure-test
     # to run
