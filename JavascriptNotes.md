@@ -1,6 +1,8 @@
 Effective Javascript
 ====================
 
+The notes starting with a number refer to recommendations from "Effective Javascript" by David Herman. The ones starting with a letter are additions I made later on.
+
 Language
 ---------
 
@@ -10,6 +12,19 @@ Language
       "use strict";
       // your code
     })();
+
+
+### A. Use global to export your functions
+
+If you are sharing this file with Node.js, your _global_ scope wouldn't be _window_, so you can use the wrapping above also for doing something like this,
+
+    (function(global) {
+      function MyModule() {}
+      MyModule.prototype.dummy = function() {};
+      global.MyModule = (global.module || {}).exports = MyModule;
+    })(this);
+
+Ref. http://blog.vjeux.com/2011/javascript/javascript-one-line-global-export.html
 
 ### 19. Higher-order functions ###
 
