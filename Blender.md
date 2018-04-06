@@ -28,3 +28,9 @@ On the numeric keypad
 * <kbd>Ctrl</kbd>-drag to draw a line in your object. It should snap to the surface.
 * <kbd>Esc</kbd> to stop measuring things and remove all the annotations.
 * Ref. http://blender.stackexchange.com/a/19773/2373
+
+### Checks ###
+* Watertight-ness
+ * select non-manifold faces http://www.mcell.org/tutorials/mesh_repair.html
+ * In Edit Mode, Ctrl+Alt+Shift+M to select non-manifold faces
+ * Select 3 or 4 vertices around hole, and press F to create a face.

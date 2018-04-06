@@ -46,6 +46,7 @@ Functions that take functions as arguments or that return functions.
       var self = this instanceof User ? this : Object.create(User.prototype);
       self.name = name;
       self.pwd = pwd;
+      return self;
     }
 
 ### 34. Store methods on prototypes ###
