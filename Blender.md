@@ -30,10 +30,11 @@ On the numeric keypad
 * <kbd>5</kbd>: Switch Perspective/Ortho
 * <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Q</kbd>: Toggle quad view
 
-
+```
     | 1 Front | 2       | 3 Side |
     | 4 R     | 5 Ortho | 6 R    |
     | 7 Top   | 8 R     | 9      |
+```
 
 * R: rotation increments
 
