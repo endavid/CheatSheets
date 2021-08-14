@@ -33,6 +33,13 @@ E.g.
 ffmpeg -i input.mp4 -ss 00:00:04 -to 00:00:08 output.gif
 ```
 
+Convert video to GIF [without dithering](https://tyhopp.com/notes/ffmpeg-crosshatch):
+
+```bash
+ffmpeg -i ${INPUT}.mp4 -vf palettegen palette.png && ffmpeg -i ${INPUT}.mp4 -i palette.png -filter_complex “paletteuse=dither=none” ${OUTPUT}.gif
+```
+
+
 ### Crop video
 
 ```bash
