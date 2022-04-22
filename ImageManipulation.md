@@ -17,3 +17,19 @@ do
     convert ${INPUT}.xcf[$((i+8))] "${OUTPUT}-$i.png"
 done
 ```
+
+### Get layer names from XCF / PS file:
+
+```bash
+identify -format '%[p]:%[l]\n' image.xcf
+```
+
+Returns:
+
+```log
+0: name-layer-0
+1: name-layer-1
+...
+```
+
+Read [Format and Print Image Properties](https://imagemagick.org/script/escape.php)
