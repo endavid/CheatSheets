@@ -12,10 +12,22 @@ git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerl
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # 4. restart iTerm and follow p10k prompts to configure it
 
+# For custom aliases and functions, put them in ~/.zshrc
+# or create multiple files, split by functionality,
+# and put them under $ZSH_CUSTOM (default $ZSH/custom)
+# -- for Oh My Zsh, that's ~/.oh-my-zsh/custom
+
+# 
+# Things for my $ZSH_CUSTOM/endavid.zsh
+#
+
+# Add path for things in Homebrew (which was installed using bash)
+export PATH=/usr/local/bin:/opt/homebrew/bin:$PATH
+
 # mass-rename-files
-# in ~/.zshrc
 autoload zmv
 alias zcp='zmv -C' zln='zmv -L'
+
 # examples
 zmv '(*).jpeg' '$1.jpg'
 zmv '(*)-backup.(*)' 'backups/$1.$2'
