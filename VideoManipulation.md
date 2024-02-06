@@ -62,3 +62,11 @@ x = (1280 - 405) / 2 = 437.5 ~= 437
 # For instance, scale the 405x720 9:16 from a previous example,
 ffmpeg -i "${INPUT}.mp4" -vf scale=750:1334 -c:a copy "${OUTPUT}.mp4"
 ```
+
+### Add green padding to top and right
+
+This extends the video and add some extra padding to the top and right of the video.
+
+```bash
+ffmpeg -i "${INPUT}.mov" -vf "pad=iw+640:ih+360:0:360:0x00ff00" -c:a copy "${OUTPUT}.mp4"
+```
