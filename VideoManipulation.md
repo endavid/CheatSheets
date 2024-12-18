@@ -70,3 +70,16 @@ This extends the video and add some extra padding to the top and right of the vi
 ```bash
 ffmpeg -i "${INPUT}.mov" -vf "pad=iw+640:ih+360:0:360:0x00ff00" -c:a copy "${OUTPUT}.mp4"
 ```
+
+### Extract mp3
+
+The input can also be an mp3. You can use `-copy` if the input is already an mp3.
+
+```bash
+# e.g. trim 2 minutes of mp3
+ffmpeg -i input.mp3 -t 120 -c copy output.mp3
+# re-encode
+ffmpeg -i input.mp4 -acodec libmp3lame output.mp3
+# start at a 60 secs, trim, and reencode
+ffmpeg -ss 60 -i input.mp3 -t 120 -acodec libmp3lame output.mp3
+```
