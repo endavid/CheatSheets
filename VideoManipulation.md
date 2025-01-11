@@ -83,3 +83,22 @@ ffmpeg -i input.mp4 -acodec libmp3lame output.mp3
 # start at a 60 secs, trim, and reencode
 ffmpeg -ss 60 -i input.mp3 -t 120 -acodec libmp3lame output.mp3
 ```
+
+### Create sound wave animation from mp3
+
+Here are some examples. See [stackoverflow](https://stackoverflow.com/a/61112012)
+
+```bash
+# "Line" Mode with Smooth Color Transitions
+ffmpeg -i input.mp3 -filter_complex "aformat=channel_layouts=mono,showwaves=mode=line:s=1280x720:colors=Blue|Cyan[v]" -map "[v]" -pix_fmt yuv420p output.mp4
+# "Waveform" Mode with Multiple Channels
+ffmpeg -i input.mp3 -filter_complex "showwaves=mode=cline:s=1920x1080:colors=Magenta|Purple|White:split_channels=1[v]" -map "[v]" -pix_fmt yuv420p output.mp4
+# "Filled Line" Mode for a Solid Look
+ffmpeg -i input.mp3 -filter_complex "aformat=channel_layouts=mono,showwaves=mode=cline:s=1080x1080:colors=Green:scale=log[v]" -map "[v]" -pix_fmt yuv420p output.mp4
+# "Pixelated" Wave for Retro Look
+ffmpeg -i input.mp3 -filter_complex "aformat=channel_layouts=mono,showwaves=mode=p2p:s=1280x720:colors=Yellow,scale=320:-1:flags=neighbor[v]" -map "[v]" -pix_fmt yuv420p output.mp4
+# From stackoverflow
+ffmpeg -y -i input.mp3 -f lavfi -i color=size=2560x1440:rate=30:color=white -filter_complex "[0:a]aformat=channel_layouts=mono,showwaves=size=2560x1440:mode=cline:rate=30:colors=black[v];[1:v][v]overlay=format=auto:x=(W-w)/2:y=(H-h)/2,format=yuv420p[outv]" -map "[outv]" -map 0:a -c:v libx264 -c:a aac -shortest output.mp4
+# "Spectrum" Visualization
+ffmpeg -i input.mp3 -filter_complex "showspectrumpic=s=1920x1080:legend=1:mode=separate:color=rainbow[v]" -map "[v]" -pix_fmt yuv420p output.mp4
+```
